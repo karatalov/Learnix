@@ -53,7 +53,7 @@ export default function MainContent() {
 					</div>
 
 					<h1 className="mainContent-title">
-						Стань профессионалом{' '}
+						Стань профессиональным{' '}
 						<span className="mainContent-gradient-text">
 							{text}
 							<span className="cursor">|</span>
@@ -68,19 +68,9 @@ export default function MainContent() {
 					</p>
 
 					<div className="mainContent-actions">
-						<button
-							className="btn-primary"
-							onClick={() => (window.location.href = '/register')}
-						>
-							Начать обучение 🚀
-						</button>
+						<button className="btn-primary">Начать обучение 🚀</button>
 
-						<button
-							className="btn-secondary"
-							onClick={() => (window.location.href = '/study')}
-						>
-							Посмотреть курсы
-						</button>
+						<button className="btn-secondary">Посмотреть курсы</button>
 
 						<button className="btn-ghost" onClick={scrollToAbout}>
 							<ArrowDown size={18} />
