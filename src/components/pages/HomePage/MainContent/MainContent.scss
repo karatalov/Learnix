@@ -1,0 +1,296 @@
+$primary-color: #6366f1;
+$accent-color: #a855f7;
+$text-light: #f8fafc;
+$text-gray: #cbd5e1;
+
+#mainContent {
+	position: relative;
+	height: 90vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	user-select: none;
+	background-image: url('/bg.webp');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	overflow: hidden;
+
+	.mainContent-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			135deg,
+			rgba(15, 23, 42, 0.64),
+			rgba(15, 23, 42, 0.54)
+		);
+		z-index: 1;
+	}
+
+	.mainContent-glow {
+		position: absolute;
+		width: 520px;
+		height: 520px;
+		border-radius: 50%;
+		filter: blur(90px);
+		opacity: 0.18;
+		z-index: 1;
+		pointer-events: none;
+		animation: floatGlow 10s ease-in-out infinite;
+	}
+	.mainContent-glow-1 {
+		left: -160px;
+		top: -120px;
+		background: radial-gradient(circle, $primary-color, transparent 60%);
+	}
+	.mainContent-glow-2 {
+		right: -180px;
+		bottom: -140px;
+		background: radial-gradient(circle, $accent-color, transparent 60%);
+		animation-delay: 2.5s;
+	}
+
+	.container {
+		position: relative;
+		z-index: 2;
+		max-width: 1200px;
+		padding: 0 20px;
+	}
+
+	.mainContent-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		max-width: 860px;
+		margin: 0 auto;
+		position: relative;
+
+		.mainContent-user-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 12px;
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.18);
+			padding: 8px 16px;
+			border-radius: 999px;
+			margin-bottom: 30px;
+			color: $text-light;
+			font-size: 1rem;
+			animation: fadeInDown 0.8s ease;
+		}
+
+		.mainContent-title {
+			font-size: 3.2rem;
+			font-weight: 850;
+			line-height: 1.08;
+			color: white;
+			margin-bottom: 24px;
+			animation: fadeInUp 0.8s ease 0.2s backwards;
+
+			.mainContent-gradient-text {
+				background: linear-gradient(90deg, #818cf8, #c084fc);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				display: inline-block;
+				position: relative;
+				.cursor {
+					display: inline-block;
+					margin-left: 2px;
+					animation: blink 1s infinite;
+				}
+			}
+		}
+
+		.mainContent-subtitle {
+			font-size: 1.22rem;
+			color: $text-gray;
+			line-height: 1.65;
+			margin-bottom: 40px;
+			max-width: 640px;
+			animation: fadeInUp 0.8s ease 0.4s backwards;
+		}
+
+		.mainContent-actions {
+			display: flex;
+			gap: 14px;
+			flex-wrap: wrap;
+			justify-content: center;
+			animation: fadeInUp 0.8s ease 0.6s backwards;
+
+			button {
+				padding: 14px 28px;
+				border-radius: 14px;
+				font-size: 1rem;
+				font-weight: 650;
+				cursor: pointer;
+				transition:
+					transform 0.25s ease,
+					box-shadow 0.25s ease,
+					background 0.25s ease,
+					border-color 0.25s ease;
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+			}
+
+			.btn-primary {
+				background: linear-gradient(135deg, $primary-color, $accent-color);
+				color: white;
+				border: none;
+				box-shadow: 0 10px 20px -10px rgba($primary-color, 0.5);
+
+				&:hover {
+					transform: translateY(-3px);
+					box-shadow: 0 18px 36px -16px rgba($primary-color, 0.7);
+				}
+				&:active {
+					transform: translateY(-1px) scale(0.99);
+				}
+			}
+
+			.btn-secondary {
+				background: rgba(255, 255, 255, 0.06);
+				color: white;
+				border: 1px solid rgba(255, 255, 255, 0.18);
+
+				&:hover {
+					background: rgba(255, 255, 255, 0.1);
+					border-color: rgba(255, 255, 255, 0.35);
+					transform: translateY(-2px);
+				}
+				&:active {
+					transform: translateY(-1px);
+				}
+			}
+
+			.btn-ghost {
+				background: transparent;
+				color: rgba(255, 255, 255, 0.92);
+				border: 1px dashed rgba(255, 255, 255, 0.25);
+
+				&:hover {
+					background: rgba(255, 255, 255, 0.06);
+					border-color: rgba(255, 255, 255, 0.45);
+					transform: translateY(-2px);
+				}
+			}
+		}
+
+		.scroll-indicator {
+			margin-top: 34px;
+			width: 46px;
+			height: 46px;
+			border-radius: 999px;
+			border: 1px solid rgba(255, 255, 255, 0.18);
+			background: rgba(255, 255, 255, 0.06);
+			color: #fff;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+
+			animation: bounceDown 1.6s ease-in-out infinite;
+			transition:
+				transform 0.25s ease,
+				background 0.25s ease;
+
+			&:hover {
+				background: rgba(255, 255, 255, 0.12);
+				transform: translateY(-2px);
+			}
+		}
+	}
+
+	@media (max-width: 768px) {
+		height: auto;
+		padding: 110px 0 80px;
+
+		background-attachment: scroll;
+
+		.mainContent-content {
+			.mainContent-title {
+				font-size: 2.55rem;
+			}
+
+			.mainContent-actions {
+				flex-direction: column;
+				width: 100%;
+
+				button {
+					width: 100%;
+					justify-content: center;
+				}
+			}
+		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#mainContent * {
+		animation: none !important;
+		transition: none !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		transform: translateY(-18px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes bounceDown {
+	0%,
+	100% {
+		transform: translateY(0);
+		opacity: 0.9;
+	}
+	50% {
+		transform: translateY(8px);
+		opacity: 1;
+	}
+}
+
+@keyframes floatGlow {
+	0%,
+	100% {
+		transform: translate(0, 0) scale(1);
+		opacity: 0.16;
+	}
+	50% {
+		transform: translate(18px, -16px) scale(1.06);
+		opacity: 0.22;
+	}
+}
+
+@keyframes blink {
+	0%,
+	50%,
+	100% {
+		opacity: 1;
+	}
+	25%,
+	75% {
+		opacity: 0;
+	}
+}
