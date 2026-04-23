@@ -59,7 +59,14 @@ export default function AboutContent() {
 					</div>
 
 					<div className="aboutContent-image">
-						<Image src="/me.jpg" alt="me" width={200} height={200} />
+						<Image
+							src="/me.jpg"
+							alt="me"
+							width={200}
+							height={200}
+							priority
+							quality={100}
+						/>
 					</div>
 				</div>
 			</div>
