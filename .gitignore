@@ -8,7 +8,6 @@
 !.yarn/versions
 
 /coverage
-/app/generated
 
 /.next/
 /out/
