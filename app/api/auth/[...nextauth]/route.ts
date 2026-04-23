@@ -74,3 +74,5 @@ const handler = NextAuth({
 })
 
 export { handler as GET, handler as POST }
+
+console.log('SECRET:', process.env.NEXTAUTH_SECRET)
