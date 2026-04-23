@@ -4,6 +4,7 @@ import { Space_Grotesk } from 'next/font/google'
 import './globals.scss'
 import Header from '@/components/layout/Header/Header'
 import Footer from '@/components/layout/Footer/Footer'
+import SessionProvider from '@/providers/SessionProvider'
 
 const geist = Geist({
 	variable: '--font-geist',
@@ -29,9 +30,11 @@ export default function RootLayout({
 	return (
 		<html lang="ru" className={`${geist.variable} ${spaceGrotesk.variable}`}>
 			<body>
-				<Header />
-				<main>{children}</main>
-				<Footer />
+				<SessionProvider>
+					<Header />
+					<main>{children}</main>
+					<Footer />
+				</SessionProvider>
 			</body>
 		</html>
 	)

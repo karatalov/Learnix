@@ -5,11 +5,13 @@ import { usePathname } from 'next/navigation'
 import { NAV_LINKS } from '@/shared/config/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSession, signOut } from 'next-auth/react'
 import './Header.scss'
 
 export default function Header() {
 	const [menuOpen, setMenuOpen] = useState(false)
 	const pathname = usePathname()
+	const { data: session } = useSession()
 
 	useEffect(() => {
 		if (!menuOpen) return
@@ -63,14 +65,24 @@ export default function Header() {
 							<button className="theme-toggle">
 								<Moon size={18} />
 							</button>
-							<Link href="/login" className="login-btn">
-								Войти
-							</Link>
+							{session ? (
+								<>
+									<span className="user-email">{session.user.email}</span>
+									<button
+										onClick={() => signOut({ callbackUrl: '/' })}
+										className="login-btn"
+									>
+										Выйти
+									</button>
+								</>
+							) : (
+								<Link href="/login" className="login-btn">
+									Войти
+								</Link>
+							)}
 							<button
 								className={`burger${menuOpen ? ' burger--open' : ''}`}
 								onClick={() => setMenuOpen((v) => !v)}
-								aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
-								aria-expanded={menuOpen}
 							>
 								{menuOpen ? <X size={22} /> : <Menu size={22} />}
 							</button>
@@ -82,27 +94,20 @@ export default function Header() {
 			<div
 				className={`mobile-overlay${menuOpen ? ' open' : ''}`}
 				onClick={() => setMenuOpen(false)}
-				aria-hidden="true"
 			/>
 
-			<div
-				className={`mobile-drawer${menuOpen ? ' open' : ''}`}
-				role="dialog"
-				aria-modal="true"
-				aria-label="Навигационное меню"
-			>
+			<div className={`mobile-drawer${menuOpen ? ' open' : ''}`}>
 				<div className="mobile-drawer__top">
 					<Image
 						src="/learnix.png"
 						alt="logo"
 						className="mobile-drawer__logo"
-						width={130}
-						height={130}
+						width={110}
+						height={110}
 					/>
 					<button
 						className="mobile-drawer__close"
 						onClick={() => setMenuOpen(false)}
-						aria-label="Закрыть меню"
 					>
 						<X size={20} />
 					</button>
@@ -132,13 +137,26 @@ export default function Header() {
 							<Moon size={18} />
 						</button>
 					</div>
-					<Link
-						href="/login"
-						className="mobile-drawer__login"
-						onClick={() => setMenuOpen(false)}
-					>
-						Войти
-					</Link>
+
+					{session ? (
+						<>
+							<p className="mobile-drawer__email">{session.user.email}</p>
+							<button
+								onClick={() => signOut({ callbackUrl: '/' })}
+								className="mobile-drawer__login"
+							>
+								Выйти
+							</button>
+						</>
+					) : (
+						<Link
+							href="/login"
+							className="mobile-drawer__login"
+							onClick={() => setMenuOpen(false)}
+						>
+							Войти
+						</Link>
+					)}
 				</div>
 			</div>
 		</>
