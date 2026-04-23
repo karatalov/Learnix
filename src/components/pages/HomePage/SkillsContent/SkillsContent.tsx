@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { CATEGORIES, SKILLS } from '@/shared/config/skills'
 import { getLevelColor } from '@/utils/getLevelColor'
-import { Category } from '@/shared/types/skills.types'
+import { Category } from '@/types/skills.types'
 import Image from 'next/image'
 import './SkillsContent.scss'
 

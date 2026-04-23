@@ -3,6 +3,7 @@ import { Geist } from 'next/font/google'
 import { Space_Grotesk } from 'next/font/google'
 import './globals.scss'
 import Header from '@/components/layout/Header/Header'
+import Footer from '@/components/layout/Footer/Footer'
 
 const geist = Geist({
 	variable: '--font-geist',
@@ -30,6 +31,7 @@ export default function RootLayout({
 			<body>
 				<Header />
 				<main>{children}</main>
+				<Footer />
 			</body>
 		</html>
 	)

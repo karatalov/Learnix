@@ -1,4 +1,4 @@
-import { Category, Skill } from '../types/skills.types'
+import { Category, Skill } from '../../types/skills.types'
 
 export const SKILLS: Skill[] = [
 	{
