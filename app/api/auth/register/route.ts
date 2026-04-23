@@ -41,7 +41,7 @@ export async function POST(req: Request) {
 
 		return NextResponse.json({ success: true })
 	} catch (error) {
-		console.log('Ошибка при регистрации:', error)
+		console.error('REGISTER ERROR:', error)
 		return NextResponse.json({ error: 'Ошибка сервера' }, { status: 500 })
 	}
 }

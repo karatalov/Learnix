@@ -13,26 +13,34 @@ const handler = NextAuth({
 				email: {},
 				password: {},
 			},
+
 			async authorize(credentials) {
-				if (!credentials?.email || !credentials?.password) return null
+				try {
+					if (!credentials?.email || !credentials?.password) {
+						return null
+					}
 
-				const user = await prisma.user.findUnique({
-					where: { email: credentials.email },
-				})
+					const user = await prisma.user.findUnique({
+						where: { email: credentials.email },
+					})
 
-				if (!user) return null
+					if (!user) return null
 
-				const isValid = await bcrypt.compare(
-					credentials.password,
-					user.passwordHash,
-				)
+					const isValid = await bcrypt.compare(
+						credentials.password,
+						user.passwordHash,
+					)
 
-				if (!isValid) return null
+					if (!isValid) return null
 
-				return {
-					id: user.id,
-					email: user.email,
-					role: user.role,
+					return {
+						id: user.id,
+						email: user.email,
+						role: user.role,
+					}
+				} catch (e) {
+					console.error('AUTH ERROR:', e)
+					return null
 				}
 			},
 		}),
@@ -44,6 +52,8 @@ const handler = NextAuth({
 
 	secret: process.env.NEXTAUTH_SECRET,
 
+	debug: true,
+
 	callbacks: {
 		async jwt({ token, user }) {
 			if (user) {
@@ -54,14 +64,11 @@ const handler = NextAuth({
 		},
 
 		async session({ session, token }) {
-			return {
-				...session,
-				user: {
-					...session.user,
-					id: token.id,
-					role: token.role,
-				},
+			if (session.user) {
+				session.user.id = token.id as string
+				session.user.role = token.role as string
 			}
+			return session
 		},
 	},
 })
